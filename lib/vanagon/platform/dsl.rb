@@ -324,6 +324,10 @@ class Vanagon
         @platform.output_dir = directory
       end
 
+      def srpm_only(srpm_only = false)
+        @platform.srpm_only = srpm_only
+      end
+
       # Helper to setup a apt repository on a target system
       #
       # @param definition [String] the repo setup file, must be a valid uri, fetched with curl

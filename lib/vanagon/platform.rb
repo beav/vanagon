@@ -11,7 +11,7 @@ class Vanagon
     attr_accessor :build_hosts, :copy, :cross_compiled, :aws_ami
     attr_accessor :aws_user_data, :aws_shutdown_behavior, :aws_key_name
     attr_accessor :aws_region, :aws_key, :aws_instance_type, :aws_vpc_id
-    attr_accessor :aws_subnet_id, :output_dir
+    attr_accessor :aws_subnet_id, :output_dir, :srpm_only
 
     # Platform names currently contain some information about the platform. Fields
     # within the name are delimited by the '-' character, and this regex can be used to
@@ -111,6 +111,7 @@ class Vanagon
       @sort ||= "sort"
       @copy ||= "cp"
       @cross_compiled ||= false
+      @srpm_only ||= false
     end
 
     # This allows instance variables to be accessed using the hash lookup syntax
@@ -270,6 +271,13 @@ class Vanagon
     # @return [true, false] true if it is a cross-compiled Linux variety, false otherwise
     def is_cross_compiled_linux?
       return (is_cross_compiled? && is_linux?)
+    end
+
+    # Utility getter to determine if we are only packaging an srpm for later building
+    #
+    # @return [true, false] true if we are onyl building an srpm, false otherwise
+    def srpm_only?
+      return @srpm_only
     end
   end
 end
